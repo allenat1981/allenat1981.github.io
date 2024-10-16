@@ -53,6 +53,9 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+include:
+  - _pages
+
 show_date: true
 
 date_format: "%A, %Y-%m-%d %H:%M:%S"
@@ -81,3 +84,9 @@ defaults:
       layout: single
       show_date: true
       comments: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
