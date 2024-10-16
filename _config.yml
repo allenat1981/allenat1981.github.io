@@ -18,8 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: "生而為人，"
+locale: zh-CHT
+name: allen@1981
+title: "生而為人…"
 #email: your-email@example.com
+description: "一簑煙雨任平生"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -49,3 +52,22 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+show_date: true
+
+date_format: "%A, %Y-%m-%d %H:%M:%S"
+
+enable_copy_code_button: true
+
+atom_feed:
+  hide: true
+
+search: true
+
+minimal_mistakes_skin: "neon"
+
+author:
+  name     : "Allen@1981"
+  #avatar   : "/assets/images/bio-photo.jpg"
+  #bio      : "My awesome biography constrained to a sentence or two goes here."
+  location : "Somewhere, TW"
