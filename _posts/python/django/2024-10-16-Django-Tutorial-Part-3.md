@@ -1,20 +1,20 @@
 ---
 layout: single
-
+render_with_liquid: false
 title: "Django Tutorial 系列(3)"
 date: 2024-10-16 16:40:41 +0800
 category: django
 tags:
   - django
 ---
-{% raw %}
+
 # Django Tutorial Part 3
 
 ## Django Template
-
+{% raw %}
 ## 注意事項
 
-因 jekyll 使用 Liquid 進行符號渲染，於 markdown 內使用 {% 會有衝突，故在本 markdown 文件原始碼本文前後加上 { % raw %} 與 { % endraw %} 區塊來略過 Liquid 符號。
+因 jekyll 使用 Liquid 進行符號渲染，於 markdown 內使用 {\% 會有衝突，故在本 markdown 文件原始碼本文前後加上 {\% raw %} 與 {\% endraw %} 區塊來略過 Liquid 符號。
 
 ### app templates 目錄結構
 
@@ -107,7 +107,6 @@ def detail(request, question_id):
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, "polls/detail.html", {"question": question})
-
 ```
 
 #### A shortcut: get_object_or_404()
@@ -191,5 +190,4 @@ app_name = 'polls'
     <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
 </li>
 ```
-
 {% endraw %}
