@@ -64,10 +64,20 @@ atom_feed:
 
 search: true
 
-minimal_mistakes_skin: "neon"
+minimal_mistakes_skin: "dark"
 
 author:
   name     : "Allen@1981"
   #avatar   : "/assets/images/bio-photo.jpg"
   #bio      : "My awesome biography constrained to a sentence or two goes here."
   location : "Somewhere, TW"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      show_date: true
+      comments: true
