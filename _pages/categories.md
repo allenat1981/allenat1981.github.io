@@ -1,4 +1,4 @@
 ---
-permalink: /categories
 layout: categories
+permalink: /categories
 ---
