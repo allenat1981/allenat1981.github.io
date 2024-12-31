@@ -107,7 +107,7 @@ DKIM 記錄的名稱格式如下
 
 - selector: 這是您為 DKIM 設定的一個唯一標識符，可以是任何字串，但通常會選擇一個有意義且易於記憶的名稱。
 - _domainkey: 這是 IANA (Internet Assigned Numbers Authority) 規定的子域名，用於標示 DKIM 記錄。
-- domain: 這是您要驗證的域名，也就是發送郵件的域名。
+- domain: 這是您要驗證的域名，也就是發送郵件的域名(寄件者郵件帳號的域名)。
 
 selector 可以自訂，但是必須一併設定在 MTA 的設定檔內。
 
