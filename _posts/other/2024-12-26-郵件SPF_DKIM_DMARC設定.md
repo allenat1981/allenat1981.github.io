@@ -19,7 +19,7 @@ tags:
 
 SPF 機制可以讓收件者的郵件伺服器，到寄件者域名的 DNS 伺服器查詢 SPF 記錄，用來確認寄件來源主機是該域名所允許的。
 
-例如以下情境 
+例如以下情境：
 
 1. 在 smtp.example.com 撰寫一隻程式，用 PHPMailer 設定 From 或 Sender 為 allen@be-yond.com.tw，寄送一封郵件到 allengogogo@gmail.com。
 2. allengogogo@gmail.com 郵件伺服器收到以後，會去找管理 be-yond.com.tw 這個域名的 DNS 主機，接著根據 DNS 主機的 SPF 記錄，查詢 be-yond.com.tw 這個域名是否允許從 example.com 這台主機寄送郵件(SPF 必須包含 include:smtp.exmaple.com)。
@@ -159,3 +159,9 @@ _dmarc.[domain] IN TXT "v=DMARC1; p=none; rua=mailto:[email-address]; ruf=mailto
   - reject：拒絕不合規的郵件。
 rua=mailto:[email address]：Aggregate reports（彙總報告）的接收地址。
 ruf=mailto:[email address]：Forensic reports（詳細報告）的接收地址。
+
+## 補充：線上驗證 SPF 或 DKIM 的 web 工具
+
+- [DKIM, SPF, SpamAssassin Email Validator](https://dkimvalidator.com/)
+- [SPF Record Check - Lookup SPF Records](https://mxtoolbox.com/spf.aspx)
+- [SPF Record Checker - Check SPF Record - SPF Record Lookup](https://dmarcly.com/tools/spf-record-checker)
