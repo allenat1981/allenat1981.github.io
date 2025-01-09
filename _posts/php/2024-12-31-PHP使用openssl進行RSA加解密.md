@@ -4,7 +4,7 @@ title: "PHP 使用 openssl 進行 RSA 加解密"
 date: 2024-12-31 17:10:00 +0800
 category: php
 tags:
-  - php
+  - PHP
   - openssl
 ---
 

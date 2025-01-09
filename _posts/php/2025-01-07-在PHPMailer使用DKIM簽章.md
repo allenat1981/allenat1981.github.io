@@ -4,7 +4,7 @@ title: "在 PHPMailer 使用 DKIM 簽章"
 date: 2025-01-07 16:00:00 +0800
 category: php
 tags:
-    - php
+    - PHP
     - mail
 ---
 
