@@ -7,8 +7,6 @@ tags:
   - git hub
 ---
 
-# git push 到遠端儲存庫(github)
-
 ## 加入遠端儲存庫
 
 ```bash!

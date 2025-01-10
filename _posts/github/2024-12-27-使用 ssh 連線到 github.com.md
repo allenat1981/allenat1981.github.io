@@ -7,8 +7,6 @@ tags:
   - git hub
 ---
 
-# 使用 ssh 連線到 github.com
-
 ## 說明
 
 1. 在本機端建立 ssh 使用的金鑰。

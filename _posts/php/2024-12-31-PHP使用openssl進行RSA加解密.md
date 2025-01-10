@@ -8,8 +8,6 @@ tags:
   - openssl
 ---
 
-# PHP 使用 openssl 進行 RSA 加解密
-
 ## 參考資料
 
 透過對 ChatGPT 提問取得的解答進行節錄。

@@ -7,8 +7,6 @@ tags:
   - mail
 ---
 
-# 設定 SPF DKIM DMARC
-
 為了通過收件者伺服器的檢驗，在寄件者的網域 DNS 必須設定 SPF、DKIM、DMARC。
 
 假設寄件者為 allen@be-yond.com.tw

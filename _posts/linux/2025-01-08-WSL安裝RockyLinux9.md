@@ -9,8 +9,6 @@ tags:
   - rocky linux
 ---
 
-# WSL安裝RockyLinux9
-
 ## 安裝 Rocky Linux 虛擬機
 
 [下載 RockyLinux tar 檔](https://docs.rockylinux.org/guides/interoperability/import_rocky_to_wsl/)

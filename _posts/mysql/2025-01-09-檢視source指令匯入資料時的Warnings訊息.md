@@ -7,8 +7,6 @@ tags:
   - mysql
 ---
 
-# 檢視 source 指令匯入資料時的 Warnings 訊息
-
 MySQL CLI 介面可以使用 source filename.sql 讀入SQL檔，但若發生 Warnings 時會無法即時檢視，可採用以下方法
 
 ## 使用 MySQL 的 tee 指令

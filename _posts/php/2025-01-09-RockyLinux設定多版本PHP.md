@@ -8,8 +8,6 @@ tags:
   - RockyLinux
 ---
 
-# Rocky Linux 設定多版本 PHP
-
 ## 安裝 EPEL 和 Remi Repository
 
 Rocky Linux 的官方儲存庫不提供多版本 PHP，因此需要先安裝第三方軟體庫。

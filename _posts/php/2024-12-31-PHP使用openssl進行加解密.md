@@ -8,20 +8,6 @@ tags:
   - openssl
 ---
 
-# PHP 使用 openssl 進行加解密
-
-## 目錄
-
-- [PHP 使用 openssl 進行加解密](#php-使用-openssl-進行加解密)
-  - [目錄](#目錄)
-  - [參考資料](#參考資料)
-  - [openssl\_ 函式](#openssl_-函式)
-    - [openssl\_encrypt() 加密函式](#openssl_encrypt-加密函式)
-    - [openssl\_decrypt() 解密函式](#openssl_decrypt-解密函式)
-  - [AES-256-CBC](#aes-256-cbc)
-    - [AES-256-CBC 加密範例](#aes-256-cbc-加密範例)
-    - [AES-256-CBC 解密範例](#aes-256-cbc-解密範例)
-
 ## 參考資料
 
 [OpenSSL Functions](https://www.php.net/manual/en/ref.openssl.php)

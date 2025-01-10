@@ -8,8 +8,6 @@ tags:
     - mail
 ---
 
-# 在 PHPMailer 使用 DKIM 簽章
-
 當系統使用 PHPMailer 寄送郵件時，若主機環境無法設定 DKIM，則可以考慮自己產生 DKIM 金鑰，並在 PHPMailer 發送郵件時設定簽章。
 
 ## 前置作業
