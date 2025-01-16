@@ -34,11 +34,13 @@ tags:
 UMask=0222
 ```
 
-編輯完成後，重新啟動服務
+編輯完成後，重新啟動相關服務
 
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl restart php-fpm
+# 若沒有生效，則重啟 httpd
+sudo systemctl restart httpd
 ```
 
 ### 不推薦的作法
