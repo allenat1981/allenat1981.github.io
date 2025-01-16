@@ -4,8 +4,7 @@ title: "WSL安裝 Rocky Linux 9"
 date: 2025-01-08 14:00:00 +0800
 category: linux
 tags:
-  - wsl
-  - Linux
+  - WSL
   - Rocky Linux
 ---
 

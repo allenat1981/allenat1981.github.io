@@ -5,7 +5,7 @@ date: 2024-12-31 17:10:00 +0800
 category: php
 tags:
   - PHP
-  - openssl
+  - OpenSSL
 ---
 
 ## 參考資料
