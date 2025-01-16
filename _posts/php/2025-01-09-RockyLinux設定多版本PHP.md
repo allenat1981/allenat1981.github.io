@@ -5,7 +5,7 @@ date: 2025-01-09 18:00:00 +0800
 category: php
 tags:
   - PHP
-  - RockyLinux
+  - Rocky Linux
 ---
 
 ## 安裝 EPEL 和 Remi Repository

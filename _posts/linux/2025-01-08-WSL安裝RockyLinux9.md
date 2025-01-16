@@ -5,8 +5,8 @@ date: 2025-01-08 14:00:00 +0800
 category: linux
 tags:
   - wsl
-  - linux
-  - rocky linux
+  - Linux
+  - Rocky Linux
 ---
 
 ## 安裝 Rocky Linux 虛擬機
