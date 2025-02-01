@@ -1,7 +1,7 @@
 baseURL: "http://localhost:1313/"
-title: "我的第一個hugo"
+title: "生而為人..."
 theme: PaperMod
-languageCode: 'zh-TW'
+languageCode: 'zh-tw'
 
 pagination:
   disableAliases: false
