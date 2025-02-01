@@ -1,6 +1,7 @@
 baseURL: "http://localhost:1313/"
 title: "我的第一個hugo"
-theme: PaperMod
+theme: 
+  - PaperMod
 languageCode: 'zh-TW'
 
 pagination:
