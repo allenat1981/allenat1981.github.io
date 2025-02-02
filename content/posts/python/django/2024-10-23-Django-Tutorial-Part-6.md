@@ -7,7 +7,7 @@ tags:
   - django
 ---
 
-# Writing your first Django app, part 6
+Writing your first Django app, part 6
 
 靜態檔案(static files)設定。
 

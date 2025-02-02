@@ -7,7 +7,7 @@ tags:
   - django
 ---
 
-# Writing your first Django app, part 5
+Writing your first Django app, part 5
 
 Django 的自動化測試
 

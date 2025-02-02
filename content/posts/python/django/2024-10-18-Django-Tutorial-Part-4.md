@@ -7,7 +7,7 @@ tags:
   - django
 ---
 
-# Django Tutorial Part 4
+Django Tutorial Part 4
 
 Writing your first Django app, part 4
 

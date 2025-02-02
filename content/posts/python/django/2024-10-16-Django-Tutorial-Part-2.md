@@ -7,7 +7,7 @@ tags:
   - django
 ---
 
-# Django Tutorial Part 2
+Django Tutorial Part 2
 
 ## 說明
 

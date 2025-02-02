@@ -2,7 +2,7 @@
 title: "寄送郵件設定 SPF DKIM DMARC"
 date: 2024-12-26 14:15:00 +0800
 categories: 
-  - 其他
+  - Other
 tags:
   - mail
 ---
