@@ -1,7 +1,8 @@
-baseURL: "http://localhost:1313/"
-title: "生而為人..."
+baseURL: "http://allenat1981.github.io/"
+title: "生而為人.."
 theme: PaperMod
-languageCode: 'zh-tw'
+languageCode: "zh-hant"
+defaultContentLanguage: "zh-hant"
 
 pagination:
   disableAliases: false
@@ -23,7 +24,7 @@ params:
   title: ExampleSite
   description: "ExampleSite description"
   keywords: [Blog, Portfolio, PaperMod]
-  author: Me
+  author: AllenAt1981
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "2006/01/02 15:04, Monday"
@@ -78,17 +79,17 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "Hi there \U0001F44B"
-    Content: Welcome to my blog
+    Content: 生而為人，罷了
 
   cover:
     hidden: true # hide everywhere but not in structured data
     hiddenInList: true # hide on list pages and home
     hiddenInSingle: true # hide on single page
 
-  editPost:
-    URL: "https://github.com/<path_to_repo>/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+  #editPost:
+  # URL: "https://github.com/allenat1981/allenat1981.github.io/content"
+  #  Text: "Suggest Changes" # edit text
+  #  appendFilePath: true # to append file path to Edit link
 
   # for search
   # https://fusejs.io/api/options.html
@@ -116,9 +117,9 @@ menu:
       name: Search
       url: /search/
       weight: 5
-    - identifier: example
+    - identifier: source
       name: Github
-      url: https://allenat1981.github.io
+      url: https://github.com/allenat1981/allenat1981.github.io
       weight: 40
     - identifier: comments
       name: Comments
