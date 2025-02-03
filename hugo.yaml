@@ -125,6 +125,10 @@ menu:
       name: Comments
       url: /comments/
       weight: 35
+    - identifier: resources
+      name: Resources
+      url: /resources/
+      weight: 36
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
@@ -143,3 +147,5 @@ outputs:
     - HTML
     - RSS
     - JSON # necessary for search
+
+enableEmoji: true
