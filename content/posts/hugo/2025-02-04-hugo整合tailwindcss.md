@@ -44,9 +44,9 @@ build:
 
 根據 PaperMod 的 [Custom Head / Footer](https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#custom-head--footer)，需新增 `layouts/partials/extend_head.html` 來將 tailwindcss 加載到 PaperMod 的 head。
 
-{{< warning >}}
+{{< alert type="warning" >}}
 若沒有套用 theme，則預設是新增 `layouts/_default/baseof.html`。
-{{< /warning >}}
+{{< /alert >}}
 
 ```html
 <!-- tailwindcss -->

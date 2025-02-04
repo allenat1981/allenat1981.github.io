@@ -1,0 +1,15 @@
+.alert-box {
+    @apply rounded-lg text-white p-4 my-4;
+}
+
+.bg-warning {
+    @apply bg-amber-400;
+}
+
+.bg-danger {
+    @apply bg-red-400;
+}
+
+.bg-info {
+    @apply bg-blue-400;
+}
