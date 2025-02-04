@@ -1,8 +1,8 @@
 baseURL: "http://allenat1981.github.io/"
 title: "生而為人.."
 theme: PaperMod
-languageCode: "zh-hant"
-defaultContentLanguage: "zh-hant"
+languageCode: "zh-tw"
+defaultContentLanguage: "zh-tw"
 
 pagination:
   disableAliases: false

@@ -3,6 +3,8 @@ title: "Resources"
 date: 2025-02-03 12:30:00 +0800
 ---
 
+放置常用資源的相關連結
+
 ## 常用資源
 
 - [emoji 符號表](https://github.com/ikatyang/emoji-cheat-sheet/)
