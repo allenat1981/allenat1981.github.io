@@ -67,3 +67,13 @@ build:
 ## 測試
 
 以上設定完成後，使用 hugo 或 hugo server 指令，則可以在編輯 layouts/ 目錄下的檔案時，由 tailwindcss 產出 main.css。
+
+## 補充：部署到 github 的腳本修正
+
+若使用 hugo 部署到 github 的腳本，則需要加入 npm install
+
+```yaml
+  # 加在安裝完 nodejs 後面
+  - name: Install npm package.json
+    run: npm install
+```
