@@ -149,3 +149,8 @@ outputs:
     - JSON # necessary for search
 
 enableEmoji: true
+
+build:
+  cachebusters:
+  - source: layouts/.*
+    target: css
