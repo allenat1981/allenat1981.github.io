@@ -35,10 +35,6 @@ build:
 在 assest/css 加入 main.css 檔，內容如下
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import "tailwindcss";
 ```
 
