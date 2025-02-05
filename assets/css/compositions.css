@@ -1,15 +1,22 @@
-.alert-box {
-    @apply rounded-lg text-white p-4 my-4;
-}
+@layer components {
+    .alert-box {
+        @apply rounded-lg text-white p-4 my-4;    
+    }
 
-.bg-warning {
-    @apply bg-amber-400;
-}
+    .bg-info {
+        @apply bg-blue-400;
+    }
 
-.bg-danger {
-    @apply bg-red-400;
-}
+    .bg-notice {
+        @apply bg-amber-200 text-emerald-900;
+    }
+    
+    .bg-warning {        
+        @apply bg-orange-400 text-gray-800;
+    }
+    
+    .bg-danger {
+        @apply bg-red-400 text-black;
+    }
 
-.bg-info {
-    @apply bg-blue-400;
 }
