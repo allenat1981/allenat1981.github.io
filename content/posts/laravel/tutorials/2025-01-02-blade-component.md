@@ -1,5 +1,5 @@
 ---
-title: "初探 blade 樣板"
+title: "初探 blade components"
 date: 2025-01-02 14:30:00 +0800
 categories: 
   - laravel
@@ -7,9 +7,10 @@ tags:
   - laravel
 ---
 
-## 說明
-
 本文件若沒有特別指定，blade 檔案位置都位於預設目錄 `專案目錄/resources/views`。
+
+laravel.blade 可以使用 components 和 layouts 二種方式套用模板(template)。  
+本文介紹 components。
 
 ## blade 樣板
 
