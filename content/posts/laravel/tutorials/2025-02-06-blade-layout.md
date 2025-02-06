@@ -14,7 +14,8 @@ tags:
 在專案根目錄建立 `resources/views/layouts/app.blade.php`
 
 {{< alert type="info">}}
-`app.blade.php` 為 layout 檔名，可自訂。
+`app.blade.php` 為 layout 的檔名，可以自行設定。  
+檔名在頁面會以 `@extends('layouts.[檔名]')` 的方式讀入。
 {{< /alert >}}
 
 ```php
