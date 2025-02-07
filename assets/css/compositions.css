@@ -1,6 +1,6 @@
 @layer components {
     .alert-box {
-        @apply rounded-lg text-white p-4 my-4;    
+        @apply rounded-lg text-white px-4 py-2 my-4;    
     }
 
     .bg-info {
@@ -16,7 +16,7 @@
     }
     
     .bg-danger {
-        @apply bg-red-400 text-black;
+        @apply bg-red-400 text-red-900;
     }
 
 }

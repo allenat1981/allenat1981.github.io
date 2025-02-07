@@ -1,7 +1,7 @@
 {{- $class := printf "alert-box bg-%s" (.Get "type") -}}
 <div class="{{ $class }}">
     {{ with .Get "title" }}
-    <div class="mb-2"><strong>{{ . }}</strong></div>
+    <div class="mb-2"><strong class="text-xl py-2">{{ . }}</strong></div>
     {{ end }}
     <div>{{ .Inner | markdownify }}</div>
 </div>
