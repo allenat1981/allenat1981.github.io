@@ -3,6 +3,19 @@ title: "Comments"
 date: 2025-02-01 20:45:00 +0800
 ---
 
+## 文件書寫風格
+
+### 靜態方法與成員方法的區別
+
+有時候在文章內不易區別類別的靜態方法和成員方法，故用以下方法區分。
+
+- 靜態方法：`ClassName::MethodName`
+- 成員方法：`$ClassName::MethodName`
+
+{{< alert type="info" >}}
+成員方法會在類別名稱前面加上 `$`，概念是來自 PHP 的 variable 宣告需要在變數名稱前面加讓 `$`，故用 `$ClassName` 表示 ClassName 類別的 instance。
+{{< /alert >}}
+
 ## 跳脫 hugo shortcode
 
 若要跳脫 hugo 的 shortcode，可加上 `/* ... */`，例如 `{{</*/* ref "..." */*/>}}`。
