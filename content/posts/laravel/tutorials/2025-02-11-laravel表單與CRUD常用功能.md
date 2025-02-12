@@ -11,8 +11,7 @@ tags:
 
 本文件的範例來自 Udemy 課程
 
-Master Laravel 11 & PHP: From Beginner to Advanced  
-第三節：22 ~ 25
+Master Laravel 11 & PHP: From Beginner to Advanced: \#3.22 ~ \#3.25
 
 ## 表單 CSRF token
 
@@ -160,7 +159,7 @@ Route::put('/tasks/{task}', function(Task $task, TaskRequest $request) {
 
 ## route 綁定 model
 
-*請參考《Laravel 啟動與運行》一書的 p.49 ~ p.51。*
+*請參考《Laravel 啟動與運行》 p.49 ~ p.51。*
 
 若 route 的 controller 會使用到 model，若不想在 controller 內總是重覆撰寫 `$Model::find()` 或 `$Model::findOrFail()`，則可以在 route 的參數設定要綁定的 model 之索引鍵(通常為主鍵 id)，並對 controller 的參數指定該 model 的 type hint，即可讓 laravel 自動。
 
@@ -192,7 +191,7 @@ public function getRouteKeyName()
 
 ## Shortcut:新增/修改 Model
 
-*請參考《Laravel 啟動與運行》一書的 p.133 ~ p.136。*
+*請參考《Laravel 啟動與運行》 p.133 ~ p.136。*
 
 laravel 的 model 機制提供快速可新增/修改 model 的方法：`Model::create()` 與 `$Model::update()`。
 
