@@ -11,7 +11,7 @@ tags:
 
 本文件的範例來自 Udemy 課程
 
-Master Laravel 11 & PHP: From Beginner to Advanced: \#3.22 ~ \#3.25
+Master Laravel 11 & PHP: From Beginner to Advanced: \#3.22 ~ \#3.25, #3.29
 
 ## 表單 CSRF token
 
@@ -133,6 +133,12 @@ TaskRequest 的驗證會在進入 controller 前完成，故呼叫 `validated()`
 
 以上即可讓 route 以 PUT 方法處理表單。
 
+{{< alert type="notice" >}}
+若是針對後端資料的異動，無論是新增/修改，或僅僅是切換一個狀態欄位，考量到安全性的情況下，都應該使用表單傳送資料，並使用 @method() 搭配 @csrf 驗證。
+
+GET 方法應該僅運用在從後端獲取資料的情境。
+{{< /alert >}}
+
 ## flash message
 
 laravel 提供 flash message 的機制，該機制是透過 session 儲存一次性的內容，適合用來在表單送出後，保存處理結果並顯示在頁面上。上述表單驗證的 errors 也是同樣的機制。
@@ -177,6 +183,34 @@ Route::get('/tasks/{task}', function(Task $task) {
 - closure 方法參數則 type hint 類別名稱 Task。
 
 以上設定 laravel 即會自動綁定 $task，該 $task 即為 id 為 {$task} 的資料。
+
+### 補充：blade route() 傳入綁定 model 索引值
+
+在 blade 使用 `route()` 產生路由路徑時，有二種方法可以傳入綁定 model 的索引值
+
+方法一，明確指定欄位
+
+```html
+<a href="{{ route('tasks.edit', ['task' => $task->id]) }}">Link Name</a>
+```
+
+此範例在 `route()` 的參數傳入 `$task->id`，即明確指定 `{task}` 的欄位為 `$task->id`。
+
+{{< alert type="info" >}}
+此方法亦適用使用其他索引欄位。
+{{< /alert >}}
+
+方法二，直接傳入`$Model`
+
+```html
+<a href="{{ route('tasks.edit', ['task' => $task]) }}">Link Name</a>
+```
+
+此範例在 `route()` 的參數傳入 `$task`，laravel 會隱含地將 `{task}` 傳入 model 的 PK，即 `$task->id`。
+
+{{< alert type="info" >}}
+此方法語句較為簡易，但僅適用於 {task} 索引欄位為 PK 的情境。
+{{< /alert >}}
 
 ### 補充：使用其他索引欄位
 
