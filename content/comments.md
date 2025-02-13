@@ -38,20 +38,24 @@ date: 2025-02-01 20:45:00 +0800
 
 {{< alert type="info" title="Info" >}}
 資訊
-type="info"
+type="info"  
+`Code Style`
 {{< /alert >}}
 
 {{< alert type="notice" title="Notice" >}}
 提醒
-type="notice"
+type="notice"  
+`Code Style`
 {{< /alert >}}
 
 {{< alert type="warning" title="Warning" >}}
 警告
-type="warning"
+type="warning"  
+`Code Style`
 {{< /alert >}}
 
 {{< alert type="danger" title="Danger" >}}
 危險
-type="danger"
+type="danger"  
+`Code Style`
 {{< /alert >}}

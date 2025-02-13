@@ -2,7 +2,7 @@
     .alert-box {
         @apply rounded-lg text-white px-4 py-2 my-4;    
     }
-
+    
     .bg-info {
         @apply bg-blue-400;
     }
@@ -18,5 +18,8 @@
     .bg-danger {
         @apply bg-red-400 text-red-900;
     }
+}
 
+.post-content .alert-box code {
+    @apply bg-gray-700 text-white;
 }
