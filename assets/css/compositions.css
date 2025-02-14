@@ -4,7 +4,7 @@
     }
     
     .bg-info {
-        @apply bg-blue-400;
+        @apply bg-blue-500 text-gray-200;
     }
 
     .bg-notice {
@@ -22,4 +22,16 @@
 
 .post-content .alert-box code {
     @apply bg-gray-700 text-white;
+}
+
+.post-content .alert-box a {
+    @apply underline text-gray-800 hover:text-gray-700;
+}
+
+.post-content ul li {
+    @apply list-disc;
+}
+
+.post-content ol li {
+    @apply list-decimal;
 }
