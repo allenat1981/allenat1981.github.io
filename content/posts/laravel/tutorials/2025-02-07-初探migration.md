@@ -7,11 +7,9 @@ tags:
   - laravel
 ---
 
- 課程：Master Laravel 11 & PHP: From Beginner to Advanced  
+本文件的範例來自 Udemy 課程
 
- 章節：第 3 節：Project #1 -Task List
-    - 17. Models and Migrations
-    - 18. Model Factory and Seeder
+Master Laravel 11 & PHP: From Beginner to Advanced: \#3.17 ~ #3.18
 
 ## 建立 Model
 
