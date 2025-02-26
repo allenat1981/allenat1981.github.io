@@ -43,7 +43,7 @@ Route::post('/tasks', function(Request $request) {
 `$request->validate()` 設定驗證規則，可使用 | 進行規則串接。  
 若驗證失敗則會自動回到表單送出的前一個頁面。此時可以在 blade 進行以下處置
 
-- 在欄位的 value 屬性使用 `{{ old('fieldname') }}`，保留使用者輸入內容。`old()` 僅能保留 POST 方法送出的欄位。
+- 在欄位的 value 屬性使用 `{{ old('fieldname') }}`，保留使用者輸入內容。`old()` **僅能保留 POST 方法送出的欄位**。
 - 在欄位下方使用 `@error` 區塊顯示欄位驗證的錯誤訊息。
 
 {{< alert type="notice" >}}
@@ -163,7 +163,7 @@ Route::put('/tasks/{task}', function(Task $task, TaskRequest $request) {
 @endif
 ```
 
-## route 綁定 model
+## Route 綁定 Model
 
 *請參考《Laravel 啟動與運行》 p.49 ~ p.51。*
 
@@ -269,3 +269,22 @@ class Task extends Model
 
 `$fillable` 陣列內代表允許新增/修改的欄位。  
 `$guarded` 陣列則是代表禁止新增/修改的欄位。通常用於資料表欄位很多，不想在 $fillable 設定太多欄位時，可改用 $guarded 做反向操作。
+
+## 補充：使用 request() 來保留 GET Query
+
+此範例來自課程 #4.48。
+
+若表單使用 GET 方法進行查詢，並要在送出表單後，保留 input 的值，則可在 blade 使用 `request()` 來取得 Query。
+
+```html
+<form method="GET" action="{{ route("books.index") }}">
+    <input type="text" name="title" placeholder="Search by title" value="{{ request('title') }}" />
+    <input type="hidden" name="filter" value="{{ request('filter') }}" />
+</form>
+```
+
+若要在 `route()` 使用陣列傳入 query parameters，也可以使用 unpack 語法 `...request()->query()`。
+
+```html
+<a href="{{ route('books.index', [...request()->query(), 'filter' => $key]) }}">Link Label</a>
+```

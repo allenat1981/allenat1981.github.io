@@ -32,6 +32,26 @@ date: 2025-02-01 20:45:00 +0800
 
 請注意！ "/" 在 hugo 代表以 `content/` 目錄為超連結檔案的根目錄，故以上範例連結至檔案`<專案目錄>/contents/comments.md`。
 
+若要加入錨點 section，則在後面加上 `#section`
+
+```markdown
+[Comments]({{</* ref "/comments#section" */>}})
+```
+
+若是在同一篇文章內的錨點 section，則直接使用
+
+```markdown
+[Comments]({{</* ref "#section" */>}})
+```
+
+需要注意的是，若章節名稱包含空白(space)，則需使用`-`符號替代空白處，例如
+
+```markdown
+[自訂 alert 文字區塊]({{</* ref "#自訂-alert-文字區塊" */>}})
+```
+
+範例：[自訂 alert 文字區塊]({{< ref "#自訂-alert-文字區塊" >}})
+
 ## 自訂 alert 文字區塊
 
 使用 `{{</* alert type="[type]" title="[title]" */>}}`
