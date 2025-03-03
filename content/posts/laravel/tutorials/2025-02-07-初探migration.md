@@ -104,7 +104,7 @@ laravel 專案預設已內建 UserFactory，所以這裡展示如何建立 TaskF
 
 ```bash
 # 指令: artisan make:factory [options ...] <FactoryName>
-php artisan make:factory --model=Task TaskFactory
+php artisan make:factory TaskFactory --model=Task
 
 # --model 用來指定 Factroy 對應的 Model 名稱。在本例中為 Task。
 
