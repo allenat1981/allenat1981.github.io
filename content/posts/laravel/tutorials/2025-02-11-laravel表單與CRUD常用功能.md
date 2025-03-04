@@ -167,7 +167,7 @@ Route::put('/tasks/{task}', function(Task $task, TaskRequest $request) {
 
 *請參考《Laravel 啟動與運行》 p.49 ~ p.51。*
 
-若 route 的 controller 會使用到 model，若不想在 controller 內總是重覆撰寫 `$Model::find()` 或 `$Model::findOrFail()`，則可以在 route 的參數設定要綁定的 model 之索引鍵(通常為主鍵 id)，並對 controller 的參數指定該 model 的 type hint，即可讓 laravel 自動。
+若 route 的 controller 會使用到 model，若不想在 controller 內總是重覆撰寫 `$Model::find()` 或 `$Model::findOrFail()`，則可以將 route parameter 名稱設定為 Action Method 的參數，並且設定 type hint 為 Model 名稱。在 route() 傳入該 Model 的 PK 值或直接傳入 $Model，即可讓 laravel 自動 binding Model 的 instance。
 
 例如在 route 要綁定 model Task
 
@@ -179,10 +179,9 @@ Route::get('/tasks/{task}', function(Task $task) {
 })->name('tasks.show');
 ```
 
-- Route 參數 uri 設定 {task} 用來代表傳入 Models\\Task 的索引鍵(通常為主鍵 id)。
-- closure 方法參數則 type hint 類別名稱 Task。
-
-以上設定 laravel 即會自動綁定 $task，該 $task 即為 id 為 {$task} 的資料。
+- Route Parameter 名稱與負責的 Action Method 參數名稱相同，例如 `{task}` 與 `$task`。
+- - action method 的 type hint 設定為 Model 的類別名稱，例如 Task。
+- `route('tasks.show', ['task' => $task])`，$task 可以是 Task 的 instance 或 id。
 
 ### 補充：blade route() 傳入綁定 model 索引值
 
