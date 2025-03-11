@@ -11,7 +11,7 @@ tags:
 
 本文件的範例來自 Udemy 課程
 
-Master Laravel 11 & PHP: From Beginner to Advanced: \#3.22 ~ \#3.25, #3.29
+Master Laravel 11 & PHP: From Beginner to Advanced: \#3.22 ~ \#3.25, \#3.29
 
 ## 表單 CSRF token
 
