@@ -58,7 +58,7 @@ public function show(Book $book)
 當 `@forelse ($book->reviews as $review)` 此語句取用到 $book->reviews，將會以 lazy-loading 的方式從資料庫讀取 reviews 資料列。
 
 {{< alert type="notice" >}}
-Model 的 lazy-loading 可參考[使用Model建立一對多關聯資料表]({{< ref "/posts/laravel/tutorials/2025-02-24-使用Model建立一對多關聯資料表#使用-lazy-loading-的方式取得資料" >}})。  
+Model 的 lazy-loading 可參考[使用Model建立一對多關聯資料表]({{< ref "/posts/laravel-11/tutorials/2025-02-24-使用Model建立一對多關聯資料表#使用-lazy-loading-的方式取得資料" >}})。  
 lazy-loading 機制不僅發生在 php，在 blade 渲染同樣有效。
 {{< /alert >}}
 
