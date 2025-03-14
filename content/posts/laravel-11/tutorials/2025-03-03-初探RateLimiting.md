@@ -74,3 +74,40 @@ Route::get('xyz', [XyzController::class, 'index'])
 `throttle:reviews` 代表使用 KeyName 為 reviews 的 rate limiting。  
 以上範例而言，代表在一個小時內，ReviewController::store() 和 XyzController::index() 的存取次數，二者加起來不能超過 3 次。
 {{< /alert >}}
+
+## 補充：在 Controller 設定 Middleware throttle
+
+此補充內容來源為 Udemy 課程 \#5.82。
+
+另一種加入 Middleware `throttle` 的方式，是在 Controller 類別 `implements HasMiddleware`，並在方法 `public static function middleware(): array` 內設定。
+
+首先，一樣在`app/Providers/AppServiceProvider.php` 設定 `RateLimiter::for()`。
+
+```php
+public function boot(): void
+{
+    RateLimiter::for('api', function(Request $request) {
+        return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+    });
+}
+```
+
+接下來在 Controller 內加入 Middleware throttle
+
+```php {linenos=true}
+class EventController extends Controller implements HasMiddleware
+{
+    public static function middleware(): array
+    {
+        return [
+            // ...
+            new Middleware('throttle:api', only: ['index', 'store', 'update', 'destory']),
+        ];
+    }
+}
+```
+
+說明：
+
+- LINE 1：在 Controller 類別 `implememts HasMiddleware`。
+- LINE 7：加入 throttle，並可以使用 only 或 except 設定 Action Methods。
