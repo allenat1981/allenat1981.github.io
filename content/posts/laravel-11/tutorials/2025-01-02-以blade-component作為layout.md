@@ -108,3 +108,56 @@ Route::get('/about', function () {
 attributes 代表 DOM 元素的屬性，例如 id、class、href ...等等。會在渲染成 html 文件時作為標籤的屬性輸出。
 
 props(property複數縮寫)在自訂的元件中則是一種內部使用的項目，傳入後可以提供引入該 props 的 blade 進行運算處理。
+
+### 補充：Reuseable Component 的 class 樣式設定
+
+在 reuseable component 設定樣式，通常只會設定基本的 class，待 component 正式被嵌入到 blade 樣板時，可再根據版面需求加上 `class` 屬性，此時需要使用 $attributes 的方法進行合併。
+
+範例：建立一個 Component: Card
+
+```bash
+php artisan make:component Card --view
+```
+
+方法一：使用 `merge()`
+
+編輯 `resources/views/components/card.blade.php`
+
+```php
+<div {{ $attributes->merge(['class' => 'rounded-md board boarder-slate-300']) }}>
+    {{ $slot }}
+</div>
+```
+
+嵌入 Card 時，加上額外的 class
+
+```php
+<x-card class="mb-4">
+  Something in slot
+</x-card>
+```
+
+方法二：使用 `class()`
+
+編輯 `resources/views/components/card.blade.php`
+
+```php
+<div {{ $attributes->class(['rounded-md board boarder-slate-300', 'actived' => $actived]) }}>
+    {{ $slot }}
+</div>
+```
+
+嵌入 Card 時，加上額外的 class
+
+```php
+<x-card class="mb-4">
+  Something in slot
+</x-card>
+```
+
+說明：
+
+- 方法一可以合併多種 $attributes，使用上較具彈性
+- 方法二則可針對 class 屬性進行操作，較為簡單且直覺。
+
+更多內容可參考官方文件[Components](http://laravel.com/docs/12.x/blade#components)
