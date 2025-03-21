@@ -1,5 +1,5 @@
 ---
-title: "打造 Reusable Blade Components"
+title: "打造 Reuseable Blade Components"
 date: 2025-03-21 10:30:00 +0800
 categories: 
   - laravel
@@ -16,6 +16,13 @@ php artisan make:component ReuseableComponent --view
 ```
 
 Component 也可搭配資料類別使用，請參考[初探 Blade Component]({{< ref "/posts/laravel-11/tutorials/2025-03-03-初探blade-component.md.md" >}})
+
+{{< alert type="info" >}}
+僅有 *.blade.php 的 Component 又稱為 Anonymous Components。  
+一般的 Component 可以在對應的 `app/View/Components/{ComponentName}.php` 綁定資料。  
+Anonymous Components 則可以利用 `@props()` 綁定。  
+請參考[Anonymous Components](https://laravel.com/docs/12.x/blade#anonymous-components)。
+{{< /alert >}}
 
 ## Render View in Action Method
 
@@ -93,6 +100,10 @@ php artisan make:component Layout --view
 - `@props()` 可設定 key/value 陣列，提供嵌入此元件的 props 預設值。
 - `{{ $attributes }}` 提供輸出嵌入此元件的 attributes。
 - `{{ $slot }}` 即預設帶入嵌入此元件標籤中的內容。
+
+{{< alert type="notice" >}}
+在 Component 的 blade.php 檔案前宣告 `@props()` 的項目才會被視為是 props，否則一律會被當成 attributes。
+{{< /alert >}}
 
 在上述的 layout.blade.php 即可用 `<x-nav-link>` 標籤嵌入元件
 
