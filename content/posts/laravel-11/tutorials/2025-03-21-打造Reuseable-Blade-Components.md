@@ -1,22 +1,27 @@
 ---
-title: "初探 blade components"
-date: 2025-01-02 14:30:00 +0800
+title: "打造 Reusable Blade Components"
+date: 2025-03-21 10:30:00 +0800
 categories: 
   - laravel
 tags:
   - laravel
 ---
 
-本文件若沒有特別指定，blade 檔案位置都位於預設目錄 `專案目錄/resources/views`。
+Laravel 的 Blade 樣板引擎，可以用來設計 Reuseable Components，讓元件可以重複使用。
 
-laravel.blade 可以使用 components 和 layouts 二種方式套用模板(template)。  
-本文介紹 components。
+可以自行於專案目錄 `resources/views` 新增 *.blade.php 樣板檔案，或者是使用 `artisan make:component` 建立 Blade Components，例如：
 
-## blade 樣板
+```bash
+php artisan make:component ReuseableComponent --view
+```
 
-樣板檔名格式為 `[filename].blade.php`
+Component 也可搭配資料類別使用，請參考[初探 Blade Component]({{< ref "/posts/laravel-11/tutorials/2025-03-03-初探blade-component.md.md" >}})
 
-在 Controller 中可以 `return view('檔名')` 的方式渲染到前端。
+## Render View in Action Method
+
+若樣板檔名格式為 `[filename].blade.php`
+
+在 Route 對應的 Action Method，可以用 `return view('檔名')` 的方式渲染到前端。
 
 ```php
 # 訪問 /about 頁面，會渲染 about.blade.php
@@ -25,13 +30,17 @@ Route::get('/about', function () {
 });
 ```
 
-## layout 元件
+## Component Layout Template
 
-在樣板目錄中加入 `components` 子目錄，可以自訂 layout 元件。
+除了使用 `extends` 的方式繼承 *.blade.php 作為 Layout Template 的方法外，Component 也可用來作為 Layout Template。
 
-### 網站 layout 範例
+首先用指令建立 layout.blade.php
 
-可建立 `components/layout.blade.php` 作為網站模板，供頁面引入。
+```bash
+php artisan make:component Layout --view
+```
+
+接著編輯樣版內容
 
 ```html
 <!-- layout.blade.php -->
@@ -67,9 +76,9 @@ Route::get('/about', function () {
 - `<x-slot:heading>` 標籤的內容會帶入模板 `{{ $heading }}` 的位置。
 - 其餘未指定 slot 的內容會帶入模板 `{{ $slot }}` 的位置。
 
-## 自訂元件
+## 自訂 Reuseable Component
 
-在 components 目錄內也可自訂常用的元件。例如建立固定樣式的動態連結元件。
+在 components 目錄內也可自訂常用的元件。
 
 範例：
 
@@ -81,7 +90,7 @@ Route::get('/about', function () {
 <a class="{{ $active ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" }} rounded-md px-3 py-2 text-sm font-medium" aria-current="{{ $active ? 'page' : 'false'}}" {{ $attributes }}>{{ $slot }}</a>
 ```
 
-- `@props()` 可設定 key/value 陣列，提供嵌入此元件的 prop。
+- `@props()` 可設定 key/value 陣列，提供嵌入此元件的 props 預設值。
 - `{{ $attributes }}` 提供輸出嵌入此元件的 attributes。
 - `{{ $slot }}` 即預設帶入嵌入此元件標籤中的內容。
 
@@ -108,6 +117,35 @@ Route::get('/about', function () {
 attributes 代表 DOM 元素的屬性，例如 id、class、href ...等等。會在渲染成 html 文件時作為標籤的屬性輸出。
 
 props(property複數縮寫)在自訂的元件中則是一種內部使用的項目，傳入後可以提供引入該 props 的 blade 進行運算處理。
+
+### 補充：傳入 PHP Expression 到 Component
+
+若 Component 需要從嵌入端傳入 attributes 或 props，有以下幾種方式
+
+範例
+
+元件 `components/job-card.blade.php` 需要一個 Apps/Models/Job 的 instance 進行資料渲染
+
+```php
+<div>
+  <div>{{ $job->title }}</div>
+  <div>{{ $job->salary }}</div>
+</div>
+```
+
+嵌入 `<x-job-card>` 並傳入 $job：
+
+指定變數名稱傳入
+
+```php
+<x-job-card :job="$job"></x-job-card>
+```
+
+若變數名稱與 Component 內所需要的變數名稱相同，則可省略 `:job` 直接寫成 `:$job`
+
+```php
+<x-job-card :$job"></x-job-card>
+```
 
 ### 補充：Reuseable Component 的 class 樣式設定
 
