@@ -129,6 +129,8 @@ attributes 代表 DOM 元素的屬性，例如 id、class、href ...等等。會
 
 props(property複數縮寫)在自訂的元件中則是一種內部使用的項目，傳入後可以提供引入該 props 的 blade 進行運算處理。
 
+更多 Components 的 Attributes 和 Data Properties 的說明請見[Laravel Blade Component 的 Data Properties 和 Attributes 的差別]({{< ref "/posts/ai-helper/2025-03-24-Laravel-Blade-Component的DataProperties和Attributes.md" >}})。
+
 ### 補充：傳入 PHP Expression 到 Component
 
 若 Component 需要從嵌入端傳入 attributes 或 props，有以下幾種方式
