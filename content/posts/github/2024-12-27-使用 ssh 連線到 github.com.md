@@ -21,10 +21,12 @@ tags:
 
 首先在本機建立 ssh 金鑰
 
-```bash!
+```bash
 # 建立使用者密鑰
-ssh-keygen -t rsa -b 4096 -C "<email>"
+ssh-keygen -t rsa -b 4096 -C "<comment>" -f "<FileName>"
+
 # 預設將密鑰檔輸出至 ~/home/.ssh 目錄
+# -f 可指定密鑰檔名，若無設定預設如下：
 # id_rsa 私鑰檔
 # id_rsa.pub 公鑰檔
 ```
@@ -63,7 +65,7 @@ ssh-add -l
 
 建立/編輯 ~/.ssh/config
 
-```conf!
+```conf
 # 目前測試 User 可以任意輸入或不輸入，測試登入仍然會是當初在 github 註冊的帳號
 # 建議 User 也可以直接設定 github 帳號
 
