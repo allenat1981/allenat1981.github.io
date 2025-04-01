@@ -1,5 +1,5 @@
 ---
-title: "git push 到遠端儲存庫(github)"
+title: "透過 ssh 將 git 儲存庫 push 到遠端主機(以 github 為例)"
 date: 2024-12-27 12:07:00 +0800
 categories: 
   - git
@@ -7,9 +7,11 @@ tags:
   - github
 ---
 
+若要將 git Repo push 到 github.com，請先完成 [github 的 ssh key 設定]({{< ref "/posts/github/2024-12-27-使用 ssh 連線到 github.com.md" >}})。
+
 ## 加入遠端儲存庫
 
-```bash!
+```bash
 # 建立名稱為 origin 的 github 遠端儲存庫(ssh 模式)
 # git remote add <remote-name> <url>
 git remote add origin git@github:allenat1981/django-tutorial.git
@@ -23,7 +25,7 @@ git remote remove origin
 
 若有需要更改分支名稱
 
-```bash!
+```bash
 # 更改目前所處分支的名稱
 # git branch -M <new-branch-name>
 git branch -M main
@@ -31,7 +33,7 @@ git branch -M main
 
 ## 將分支 push 到遠端儲存庫
 
-```bash!
+```bash
 # 將本地端分支 push 到遠端儲存庫
 # git push -u <remote-name> <local-branch-name>
 
@@ -52,7 +54,7 @@ git push # 相當於 git push origin main
 
 若要 push 本機儲存庫到遠端儲存庫，並指定不同的分支名稱時
 
-```bash!
+```bash
 # 指定分支名稱
 # git push <remote-name> <local-branch-name>:<remote-branch-name>
 # 若指定的遠端分支不存在則會建立一個<remote-branch-name> 的分支

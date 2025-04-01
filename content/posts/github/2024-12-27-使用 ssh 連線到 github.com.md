@@ -66,16 +66,13 @@ ssh-add -l
 建立/編輯 ~/.ssh/config
 
 ```conf
-# 目前測試 User 可以任意輸入或不輸入，測試登入仍然會是當初在 github 註冊的帳號
-# 建議 User 也可以直接設定 github 帳號
-
-Host github.com
+Host myGithub
   HostName github.com
-  User <user-name>
+  User git
   IdentityFile ~/.ssh/<key-file-name>
 ```
 
-建立完成後使用 `ssh -T git@github.com` 測試即可。
+建立完成後使用 `ssh -T myGithub` 或 `ssh -T git@github.com` 測試即可。
 
 ## 結論
 
