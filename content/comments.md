@@ -92,3 +92,11 @@ type="warning"
 type="danger"  
 `Code Style`
 {{< /alert >}}
+
+## 停用 hugo 快取
+
+有時候新增文章後，並沒有辦法即時在本機端看到新增的文章，此時可以嘗試加上 `--disableFastRender` 停用快取。
+
+```bash
+hugo server -D --disableFastRender
+```
