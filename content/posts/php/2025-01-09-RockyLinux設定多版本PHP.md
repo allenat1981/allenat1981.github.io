@@ -97,3 +97,46 @@ sudo systemctl start php81-php-fpm
 ```bash
 sudo systemctl restart httpd
 ```
+
+## 補充：系統預設的 PHP 版本
+
+若要在 dnf module 設定預設的 PHP 版本，請參考
+
+若要安裝多版本PHP，請參考[Rocky Linux 9 安裝 php 8.4]({{< ref "/posts/php/2025-01-09-RockyLinux設定多版本PHP" >}})。
+
+若是已經安裝多版本的 PHP，例如 php74, php84，則可使用 `alternatives` 指令建立和切換預設 PHP 版本，操作如下。
+
+使用 which 找出 php74 和 php84 所在的位置
+
+```bash
+which php74
+# /usr/bin/php74
+
+which php84
+# /usr/bin/php84
+```
+
+使用 `alternatives --install`
+
+```bash
+sudo alternatives --install /usr/bin/php php /usr/bin/php74 74
+
+sudo alternatives --install /usr/bin/php php /usr/bin/php84 84
+```
+
+說明：
+
+
+`sudo alternatives --install <link> <name> <path> <priority>
+
+- `<link>`：通用的命令路徑（通常是 /usr/bin/php）。
+- `<name>`：alternatives 系統中的名稱（通常是 php）。
+- `<path>`：實際的執行檔路徑（例如 /usr/bin/php74）。
+- `<priority>`：優先權（較高的數字表示較高的優先權）。
+
+切換版本
+
+```bash
+sudo alternatives --config php
+# 根據提示選擇版本
+```
