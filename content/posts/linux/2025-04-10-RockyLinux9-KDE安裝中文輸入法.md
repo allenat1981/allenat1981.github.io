@@ -75,8 +75,6 @@ Comment=Start IBus input method daemon
 
 須先安裝 flatpak，請參考 [Rocky Linux Quick Setup](https://flatpak.org/setup/Rocky%20Linux)。
 
-
-
 ```bash
 flatpak install org.fcitx.Fcitx5
 flatpak install org.fcitx.Fcitx5.Addon.Chewing

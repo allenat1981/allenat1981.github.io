@@ -126,8 +126,7 @@ sudo alternatives --install /usr/bin/php php /usr/bin/php84 84
 
 說明：
 
-
-`sudo alternatives --install <link> <name> <path> <priority>
+`sudo alternatives --install <link> <name> <path> <priority>`
 
 - `<link>`：通用的命令路徑（通常是 /usr/bin/php）。
 - `<name>`：alternatives 系統中的名稱（通常是 php）。
