@@ -93,9 +93,11 @@ type="danger"
 `Code Style`
 {{< /alert >}}
 
-## 停用 hugo 快取
+## 新增文章無法產出內容
 
-有時候新增文章後，並沒有辦法即時在本機端看到新增的文章，此時可以嘗試加上 `--disableFastRender` 停用快取。
+若新增文章無法在頁面上看到，請先檢查 date 是否為目前時間之後，hugo 會根據該欄位決定是否產出。也就是說若 date 設定的時間還沒到，hugo 會略過該文章。
+
+若 date 沒有問題，但仍然沒有辦法即時在本機端看到新增的文章，此時可以嘗試加上 `--disableFastRender` 停用快取。
 
 ```bash
 hugo server -D --disableFastRender
