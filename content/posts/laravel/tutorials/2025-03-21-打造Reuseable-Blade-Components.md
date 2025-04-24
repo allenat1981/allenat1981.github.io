@@ -15,7 +15,7 @@ Laravel 的 Blade 樣板引擎，可以用來設計 Reuseable Components，讓�
 php artisan make:component ReuseableComponent --view
 ```
 
-Component 也可搭配資料類別使用，請參考[初探 Blade Component]({{< ref "/posts/laravel-11/tutorials/2025-03-03-初探blade-component.md.md" >}})
+Component 也可搭配資料類別使用，請參考[初探 Blade Component]({{< ref "/posts/laravel/tutorials/2025-03-03-初探blade-component.md.md" >}})
 
 {{< alert type="info" >}}
 僅有 *.blade.php 的 Component 又稱為 Anonymous Components。  

@@ -1,13 +1,14 @@
 ---
-title: "MyShop 購物網練習筆記"
+title: "Authentication 自訂認證"
 date: 2025-04-15 14:30:00 +0800
 categories: 
   - laravel
 tags:
   - laravel
+  - myshop
 ---
 
-使用 Laravel 12 練習建立一個購物網。
+將使用者分為一般前台使用者(user) 和後台使用者(admin)，並分別為其建立相對應的 Authentication Guard。
 
 ## authentication
 
