@@ -82,7 +82,7 @@ date: 2025-02-01 20:45:00 +0800
 
 ## 自訂 alert 文字區塊
 
-使用 `{{</* alert type="[type]" title="[title]" */>}}`
+使用 `{{</* alert type="[type]" title="[title]" */>}}`...`{{</* /alert */>}}`。
 
 {{< alert type="info" title="Info" >}}
 資訊
