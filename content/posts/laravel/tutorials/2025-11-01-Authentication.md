@@ -68,3 +68,277 @@ API 認證套件聚焦在 API token 認證。cookie based 認證聚焦在基於�
 - Web 網站：內建的 session cookie 機制。
 - API application：`Sanctum`(簡單 API Token 機制)　或 `Passport`(OAuth2 機制)。
 - SPA application：`Sanctum` 機制(同時適用 session cookie 和 API Token)。
+
+## Authentication Quickstart
+
+### Retrieving the Authenticated User
+
+若要取得已認證的 user 資料，可透過 facade: Auth 的 user 方法
+
+```php{linenos=true}
+use Illuminate\Support\Facades\Auth;
+ 
+// Retrieve the currently authenticated user...
+$user = Auth::user();
+ 
+// Retrieve the currently authenticated user's ID...
+$id = Auth::id();
+```
+
+在處理 request 的機制中(例如 Controller)，可以使用 Illuminate\Http\Request 的 instance 取得 user。
+
+```php{linenos=true}
+<?php
+ 
+namespace App\Http\Controllers;
+ 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+ 
+class FlightController extends Controller
+{
+    /**
+     * Update the flight information for an existing flight.
+     */
+    public function update(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+ 
+        // ...
+ 
+        return redirect('/flights');
+    }
+}
+```
+
+若要確認目前的 HTTP request 是否已認證，可以使用 facade 的 `Auth::check()`，若已認證則回傳 `true`。
+
+```php{linenos=true}
+use Illuminate\Support\Facades\Auth;
+ 
+if (Auth::check()) {
+    // The user is logged in...
+}
+```
+
+### Protecting Routes
+
+`Route middleware` 可以用來保護路由，只允許已認證的使用者存取。
+
+Laravel 內建名稱為 `auth` 的 middleware，該 middlware 是
+`Illuminate\Auth\Middleware\Authenticat` 的別名。Laravel 預設已經加入該 middleware ，只須在需要受保護的 route 加上該 middleware 即可使用。
+
+```php{linenos=true}
+Route::get('/flights', function () {
+    // Only authenticated users may access this route...
+})->middleware('auth');
+
+```
+
+#### Redirecting Unauthenticated Users
+
+當 `auth` 阻擋為認證的使用者，預設會將用戶導向名稱為 `login` 的路由。你可以在 `bootstrap/app.php` 改變此一行為。
+
+```php{linenos=true}
+// bootstrap/app.php
+
+use Illuminate\Http\Request;
+ 
+->withMiddleware(function (Middleware $middleware): void {
+    $middleware->redirectGuestsTo('/login');
+ 
+    // Using a closure...
+    $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
+})
+
+```
+
+#### Redirecting Authenticated Users
+
+相對於 middleware `auth`，使用 middleware `guest` 的可以設定僅有未通過認證的用戶可存取路由。在 `guest` 的保護下，已認證的用戶將會被導向名稱為 `dashboard` 或 `home` 的路由。
+
+你樣可以透過編輯 `bootstrap/app.php` 異動行為：
+
+```php{linenos=true}
+// bootstrap/app.php
+
+use Illuminate\Http\Request;
+ 
+->withMiddleware(function (Middleware $middleware): void {
+    $middleware->redirectUsersTo('/panel');
+ 
+    // Using a closure...
+    $middleware->redirectUsersTo(fn (Request $request) => route('panel'));
+})
+```
+
+#### Specifying a Guard
+
+當使用 middleware `auth` 時，你可以指定要使用那一個 `guard` 進行認證。 guard 必須是在 `config/auth.php` 的 `guard` 陣列中所設定的 key。
+
+```php{linenos=true}
+Route::get('/flights', function () {
+    // Only authenticated users may access this route...
+})->middleware('auth:admin');
+```
+
+### Login Throttling
+
+若使用 Laravel 的 application starter kits， 嘗試登入會自動加入 rate limit。
+
+範例為 Fority 預設的 rate limit 相關程式碼
+
+```php{linenos=true}
+RateLimiter::for('login', function (Request $request) {
+    // rate limit 規則
+    // 每個 ip 或使用者名稱(預設為 email) 
+    // 每分鐘最多可嘗試登入 5 次
+    $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
+
+    return Limit::perMinute(5)->by($throttleKey);
+});
+
+```
+
+## Manually Authenticating Users
+
+若沒有使用 Laravel 提供的 application starter kit，則必須自行設計 user 認證。
+
+使用 facade `Auth::attempt()` 對 user 傳入的 credentials 進行認證(通常指由 login 表單填入的帳號與密碼欄位)。認證通過後，你必須重建 user 的 session 來避免 session fixation 攻擊。
+
+```php{linenos=true}
+<?php
+ 
+namespace App\Http\Controllers;
+ 
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+ 
+class LoginController extends Controller
+{
+    /**
+     * Handle an authentication attempt.
+     */
+    public function authenticate(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+ 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('dashboard');
+        }
+ 
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+}
+```
+
+`Auth::attempt()` 接收一組 key/value 陣列參數，透過該組參數可在資料庫找到 user 資料，並將輸入的 password 與 user 的 password 進行比對。要注意的是，輸入的 password 值並不需要進行 hash ，attempt() 內部會自行處理將明碼 password 進行 hash。
+
+Laravel 的認證機制是從 `config/auth.php` 設定的 guard 的 provider 取得 user 資料。預設是 Eloquent 的 user provider 來源是 `App\Models\User`。
+
+若認證成功 attempt() 會回傳 true，否則回傳 false。
+
+`redirect()->intended()` 方法則會用戶嘗試導向在尚未被 `auth` 攔截請求前的頁面。若無法找到或前往該頁面，則可以設定一個備援的位置。
+
+範例：
+
+若用戶登入後的動作為 `redirect()->intended('dashboard')`
+
+1. 假設用戶（未登入）嘗試存取 profile (使用者頁面)。
+2. auth 中間件發現使用者未登入，攔截請求，並將 profile 儲存起來。
+3. 中間件將使用者導向登入頁面 login。
+4. 使用者成功登入。
+5. 此時，登入控制器不應該導向到主頁，而應該使用 intended() 方法，將使用者導向回他們一開始想去的 profile。
+6. 若用戶無法前往 profile，或者是用戶是直接請求 login(即沒有 1~3 步驟)，則系統會將用戶導向 dashboard。
+
+### 用戶登入實作細節
+
+#### Specifying Additional Conditions
+
+若驗證時希望增加額外的查詢條件，則可以在 attempt 增加欄位條件。
+
+```php{linenos=true}
+if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
+    // Authentication was successful...
+}
+```
+
+若是更複雜的查詢條件，則可以提供 closure
+
+```php{linenos=true}
+use Illuminate\Database\Eloquent\Builder;
+ 
+if (Auth::attempt([
+    'email' => $email,
+    'password' => $password,
+    fn (Builder $query) => $query->has('activeSubscription'),
+])) {
+    // Authentication was successful...
+}
+```
+
+{{< alert type="notice" >}}
+`Auth::attempt($credentials)` 是依靠傳入的 $credentials 的欄位名稱對應 user 資料庫中的欄位名稱取得 user。  
+要注意的是在比對密碼時，**password 欄位名稱預設是固定的**，若有需要修改密碼欄位名稱，則需要去調整部份實作內容。
+{{< /alert >}}
+
+若要在身份和密碼認證成功後，針對用戶進行進一步的檢驗，則可使用 `Auth::attemptWhen()` 方法。  
+`Auth::attemptWhen()` 允許傳入第二個 callback function 參數，該 callback function 會在用戶身份和密碼認證成功後，帶入 `User $user` 並執行。
+
+範例：用戶認證成功後，判斷用戶是否未被停權
+
+```php{linenos=true}
+if (Auth::attemptWhen([
+    'email' => $email,
+    'password' => $password,
+], function (User $user) {
+    return $user->isNotBanned();
+})) {
+    // Authentication was successful...
+}
+```
+
+#### Accessing Specific Guard Instances
+
+若要以不同的 guard 來進行認證和取得 user 資料，則使用 `Auth::guard($guard)` 方法，參數 `$guard` 是設定在 `config/auth.php` 的 guards 陣列中的 guard。
+
+{{< alert type="notice" >}}
+若 facade `Auth` 預設未使用 `guard()` 指定 guard，預設使用 `config/auth.php` 中的 `defaults.guard` 的設定。  
+補充：Laravel 12 中預設為 `env('AUTH_GUARD', 'web')`。
+{{< /alert >}}
+
+### Remembering Users
+
+若要為 application 提供**記住我(remember me)**功能，可以在 `Auth::attempt()` 傳入第二個參數 `bool $remember`。
+
+若 $remember 為 true，則 Laravel 將維持用戶登入狀態，直到用戶手動登出。  
+若要使用 remember me 機制，users 資料表必須包含欄位 `remember_token`，該欄位會儲存 remember me 機制所需的 token。
+
+```php{linenos=true}
+use Illuminate\Support\Facades\Auth;
+ 
+if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
+    // The user is being remembered...
+}
+```
+
+若 application 提供 remember me 機制，在用戶認證成功後，會產生一組 remember me token，儲存在資料庫的 `users.remember_token` 以及用戶端的 cookie。
+
+你可以使用 `Auth::viaRemember()` 來判斷當前已認證的 user 是否是透過 remember me cookie 通過認證。
+
+```php{linenos=true}
+use Illuminate\Support\Facades\Auth;
+ 
+if (Auth::viaRemember()) {
+    // 若是透過 remember me token 認證的使用者
+    // 可以要求 user 進行二階段認證等進一步的認證
+}
+```
