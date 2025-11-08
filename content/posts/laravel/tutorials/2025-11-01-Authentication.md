@@ -504,3 +504,7 @@ Route::post('/settings', function () {
     // ...
 })->middleware(['password.confirm']);
 ```
+
+## Adding Custom Guards
+
+//TODO 待補
