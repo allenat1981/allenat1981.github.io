@@ -342,3 +342,165 @@ if (Auth::viaRemember()) {
     // 可以要求 user 進行二階段認證等進一步的認證
 }
 ```
+
+### Other Authentication Methods
+
+#### Authenticate a User Instance
+
+若需要將一個已存在的 user instance 設定為已認證
+
+```php
+// 將 $user 設為已認證
+Auth::login($user);
+
+// 也可加上 remember me
+Auth::login($user, $remember = true);
+
+// 若要指定 guard，例如 admin
+Auth::guard('admin')->login($user);
+
+```
+
+#### Authenticate a User by ID
+
+若要直接將 users 資料表 primary key 設定已認證
+
+```php
+// 將 users.id = 1 的 user 設為已認證
+Auth::loginUsingId(1);
+
+// 也可加上 remember me
+Auth::loginUsingId(1, remember: true);
+```
+
+#### Authenticate a User Once
+
+若要在單一次的 request 將 user 設定為已認證
+
+```php
+if (Auth::once($credentials)) {
+    // ...
+}
+```
+
+此認證僅在本次 request 有效，且不會觸發 `Login` event。
+
+## HTTP Basic Authentication
+
+暫無需求，故先略過。
+
+## Logging Out
+
+使用 `Auth::logout()` 可將 user 登出。登出 user 時可視情況同時將 session 清除以及重建 CSRF Token。登出後通常會將 user 導向其他頁面。如範例：
+
+```php{linenos=true}
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+ 
+/**
+ * Log the user out of the application.
+ */
+public function logout(Request $request): RedirectResponse
+{
+    // 將 user 登出
+    Auth::logout();
+ 
+    // 清除 session
+    $request->session()->invalidate();
+ 
+    // 重建 CSRF Token
+    $request->session()->regenerateToken();
+ 
+    // 轉址到其他頁面(例如首頁)
+    return redirect('/');
+}
+```
+
+### Invalidating Sessions on Other Devices
+
+Laravel 提供一種機制，可在保留目前裝置的 user 認證的同時，將 user 在其他裝置的 session 廢除並登出。此機制通常應用在 user 變更密碼後，會將 user 從其他裝置登出，並保留目前裝置的認證狀態。
+
+使用此機制前，必須確認 middle `Illuminate\Session\Middleware\AuthenticateSession`(alias `auth.session`) 已套用在 route。通常會將此 middleware 設定在 route group，已套用大部分 routes。如範例：
+
+```php{linenos=true}
+Route::middleware(['auth', 'auth.session'])->group(function () {
+    Route::get('/', function () {
+        // ...
+    });
+});
+```
+
+接著你可以使用 `Auth::logoutOtherDevices()` 此方法必須驗證 user 的密碼，通常會提供一個表單讓 user 輸入密碼。如範例：
+
+```php{linenos=true}
+use Illuminate\Support\Facades\Auth;
+
+Auth::logoutOtherDevices($currentPassword);
+```
+
+當 `Auth::logoutOtherDevices()` 被調用，user 的其它 sessions 將被廢除，代表由其他地方完成的認證將被登出。
+
+## Password Confirmation
+
+Larave 提供內建的機制，若 user 要取得一些敏感資料或進入敏感的功能，可要求 user 再次驗證密碼。要實作此功能，你必須加入 2 個 route：
+
+1. 一個 route 用來顯示讓 user 再次輸入密碼的頁面。
+2. 一個 route 用來驗證 user 密碼，並將 user 重新導向他們的目標。
+
+### Configuration
+
+在完成密碼驗證後，user 在 3 小時內不需要在重新驗證。你也可以透過修改 `config/auth.php` 的 `password_timeout` 設定，來變更 user 必須重新驗證密碼的間隔時間。
+
+### Routing
+
+#### The Password Confirmation Form
+
+第一個 route 用來提供 user 輸入密碼的表單。如範例
+
+```php{linenos=true}
+Route::get('/confirm-password', function () {
+    // auth.confirm-password 為至少包含一個 password 欄位的表單視圖
+    return view('auth.confirm-password');
+})->middleware('auth')->name('password.confirm');
+
+```
+
+#### Confirming the Password
+
+第二個 route 用來驗證 user 輸入的密碼，並將 user 重新導向目標。如範例：
+
+```php{linenos=true}
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+ 
+Route::post('/confirm-password', function (Request $request) {
+    // 若密碼不正確，回到上一頁並加入錯誤訊息
+    if (!Hash::check($request->password, $request->user()->password)) {
+        return back()->withErrors([
+            'password' => ['The provided password does not match our records.']
+        ]);
+    }
+    
+
+    // 重要！在 user 的 session 設定最後一次驗證密碼的時間，用來判定何時逾時。
+    $request->session()->passwordConfirmed();
+ 
+    // 將 user 導向目標位置。
+    return redirect()->intended();
+})->middleware(['auth', 'throttle:6,1']);
+```
+
+### Protecting Routes(Password Confirmation)
+
+你應該替需要密碼驗證保護的 route 設定 middleware `password.confirm`。Laravel 預設已裝載此 middleware。此 middleware　會自動將 user 的目標位置除存在 session 中，並將 user 重新導向至名稱為 `password.confirm` 的 route。待 user 完成密碼驗證後，即可將 user 重新導向已儲存的目標位置。如範例：
+
+```php{linenos=true}
+Route::get('/settings', function () {
+    // ...
+})->middleware(['password.confirm']);
+ 
+Route::post('/settings', function () {
+    // ...
+})->middleware(['password.confirm']);
+```
