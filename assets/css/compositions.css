@@ -8,15 +8,15 @@
     }
 
     .bg-notice {
-        @apply bg-amber-200 text-emerald-900;
+        @apply bg-amber-100 text-emerald-900;
     }
     
     .bg-warning {        
-        @apply bg-orange-400 text-gray-800;
+        @apply bg-orange-300 text-gray-800;
     }
     
     .bg-danger {
-        @apply bg-red-400 text-red-900;
+        @apply bg-red-500 text-gray-800;
     }
 }
 
