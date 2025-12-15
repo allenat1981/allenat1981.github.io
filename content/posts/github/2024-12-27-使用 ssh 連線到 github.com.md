@@ -22,10 +22,12 @@ tags:
 首先在本機建立 ssh 金鑰
 
 ```bash
+# 將工作目錄切換到 ~/.ssh
+cd ~/.ssh
+
 # 建立使用者密鑰
 ssh-keygen -t rsa -b 4096 -C "<comment>" -f "<FileName>"
 
-# 預設將密鑰檔輸出至 ~/home/.ssh 目錄
 # -f 可指定密鑰檔名，若無設定預設如下：
 # id_rsa 私鑰檔
 # id_rsa.pub 公鑰檔
