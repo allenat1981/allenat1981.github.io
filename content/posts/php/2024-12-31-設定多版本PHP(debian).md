@@ -1,5 +1,5 @@
 ---
-title: "設定多版本PHP-FPM"
+title: "設定多版本PHP(debian)"
 date: 2024-12-31 16:51:00 +0800
 categories: 
   - php
@@ -38,13 +38,31 @@ sudo apt install lsb-release ca-certificates curl
 sudo curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
 
 # 將 packages.sury.org/php 加入到 sources.list
+# 若使用 debian 為基礎的發行型，如 Linux Mint，請將 $(lsb_release -sc) 替換為 debian 版本號，例如 debian 13 請替換為 trixie
 sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 
 # 再更新一次
 sudo apt update
 ```
 
+### 安裝不同版本的 PHP
+
+```bash
+# 安裝不同版本的 php-fpm
+# sudo apt install php{version}
+
+sudo apt install php7.4
+sudo apt install php8.2
+
+# 可安裝 extension，以下範例
+sudo apt install php7.4-gd php7.4-pdo-mysql #...
+sudo apt install php8.2-gd php8.2-pdo-mysql #...
+
+```
+
 ### 安裝不同版本的 PHP-FPM
+
+若要安裝不同版本的 php-fpm
 
 ```bash
 # 安裝不同版本的 php-fpm
