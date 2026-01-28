@@ -11,6 +11,9 @@ tags:
 
 ## 說明
 
+2026/01/28 更新：  
+若要在本機網站專案使用自簽憑證測試，可參考 [使用mkcert建立測試憑證]({{< ref "/posts/linux/2026-01-28-mkcert建立測試憑證.md" >}})。
+
 若要在本地開發/測試使用 TLS 連線(https)，可以建立自簽憑證並安裝至 apache 的 VirtualHost。
 
 ## 建立自簽憑證
@@ -105,7 +108,7 @@ sudo systemctl restart httpd
 sudo systemctl restart httpd
 ```
 
-接著即可用瀏覽器開啟 https://myproject.localhost 進行測試。
+接著即可用瀏覽器開啟 `https://myproject.localhost` 進行測試。
 
 ## 將自簽憑證加入受信任的憑證庫
 
