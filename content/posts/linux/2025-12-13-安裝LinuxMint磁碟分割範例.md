@@ -14,9 +14,9 @@ tags:
 |目錄|建議空間|磁碟格式|標記|
 |---|------|-------|---|
 |/boot/efi|512MB ~ 1024MB|fat32(vfat)|esp or boot|
-|/|300GB ~ 500GB|ext4| |
-|swap|和實體記憶體一樣|swap| |
-|/home|剩餘空間|ext4| |
+|/|300GB ~ 500GB|ext4||
+|swap|和實體記憶體一樣|swap||
+|/home|剩餘空間|ext4||
 
 {{< alert type="info" >}}
 使用 Linux Mint 安裝光碟時，可使用 `GParted` 工具進行分割。  
