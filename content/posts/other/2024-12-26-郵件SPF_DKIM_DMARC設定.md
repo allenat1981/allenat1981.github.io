@@ -9,7 +9,7 @@ tags:
 
 為了通過收件者伺服器的檢驗，在寄件者的網域 DNS 必須設定 SPF、DKIM、DMARC。
 
-假設寄件者為 allen@be-yond.com.tw
+假設寄件者為 `allen@be-yond.com.tw`
 
 必須到 be-yond.com.tw 的 DNS 管理介面設定，加入以下記錄
 
@@ -19,8 +19,8 @@ SPF 機制可以讓收件者的郵件伺服器，到寄件者域名的 DNS 伺�
 
 例如以下情境：
 
-1. 在 smtp.example.com 撰寫一隻程式，用 PHPMailer 設定 From 或 Sender 為 allen@be-yond.com.tw，寄送一封郵件到 allengogogo@gmail.com。
-2. allengogogo@gmail.com 郵件伺服器收到以後，會去找管理 be-yond.com.tw 這個域名的 DNS 主機，接著根據 DNS 主機的 SPF 記錄，查詢 be-yond.com.tw 這個域名是否允許從 example.com 這台主機寄送郵件(SPF 必須包含 include:smtp.exmaple.com)。
+1. 在 smtp.example.com 撰寫一隻程式，用 PHPMailer 設定 From 或 Sender 為 `allen@be-yond.com.tw`，寄送一封郵件到 `allengogogo@gmail.com`。
+2. `allengogogo@gmail.com` 郵件伺服器收到以後，會去找管理 be-yond.com.tw 這個域名的 DNS 主機，接著根據 DNS 主機的 SPF 記錄，查詢 be-yond.com.tw 這個域名是否允許從 example.com 這台主機寄送郵件(SPF 必須包含 include:smtp.exmaple.com)。
 3. 根據 SPF 的檢查判斷郵件的來源是否合法。
 
 DNS 的 SPF 記錄欄位如下：
@@ -112,8 +112,8 @@ selector 可以自訂，但是必須一併設定在 MTA 的設定檔內。
 考慮以下情境
 
 1. MTA 主機為 mymail.example.com。
-2. 寄件者帳號為 allen@be-yond.com.tw。
-3. 透過 mymail.example.com 主機代表 be-yond.com.tw 發送郵件。例如在 mymail.example.com 主機以 allen@be-yond.com.tw 作為寄件者發送郵件。
+2. 寄件者帳號為 `allen@be-yond.com.tw`。
+3. 透過 mymail.example.com 主機代表 be-yond.com.tw 發送郵件。例如在 mymail.example.com 主機以 `allen@be-yond.com.tw` 作為寄件者發送郵件。
 
 建立一組 DKIM 金鑰，並替 selector 命名為 mymail.example.com。在負責 be-yond.com.tw 的 DNS 主機中設定以下 DNS 記錄。
 
