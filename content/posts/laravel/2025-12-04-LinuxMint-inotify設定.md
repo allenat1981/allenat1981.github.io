@@ -20,7 +20,7 @@ Linux 用 inotify 監控檔案變更（Vite dev server 需要監控 JS、CSS、B
 
 ENOSPC: System limit for number of file watchers reached...
 
-### 檢查目前系統的 watcher 數量
+## 檢查目前系統的 watcher 數量
 
 ```bash
 cat /proc/sys/fs/inotify/max_user_watches
