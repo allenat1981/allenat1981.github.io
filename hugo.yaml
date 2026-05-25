@@ -1,3 +1,4 @@
+enableGitInfo: true
 baseURL: "http://allenat1981.github.io/"
 title: "生而為人.."
 theme: PaperMod
@@ -18,6 +19,12 @@ buildExpired: false
 minify:
   disableXML: true
   minifyOutput: true
+
+frontmatter:
+  lastmod:
+    - :git
+    - lastmod
+    - date
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
