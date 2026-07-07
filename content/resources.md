@@ -1,6 +1,7 @@
 ---
 title: "Resources"
-date: 2025-02-03 12:30:00 +0800
+date: 2025-02-03T12:30:00+0800
+lastmod: 2026-07-07T18:31:00+08:00
 ---
 
 放置常用資源的相關連結
@@ -10,6 +11,7 @@ date: 2025-02-03 12:30:00 +0800
 - [emoji 符號表](https://github.com/ikatyang/emoji-cheat-sheet/)
 - [MarkDown語法大全](https://hackmd.io/@eMP9zQQ0Qt6I8Uqp2Vqy6w/SyiOheL5N/%2FBVqowKshRH246Q7UDyodFA)
 - [測試IPv6連線](https://test-ipv6.com/)
+- [VirusTotal](https://www.virustotal.com/gui/home/upload)：線上掃描病毒工具。
 
 ## 工具
 
